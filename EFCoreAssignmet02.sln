@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreAssignmet02", "EFCoreAssignmet02\EFCoreAssignmet02.csproj", "{CC6C1914-54F6-4795-9DCD-913CB99FFC22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC6C1914-54F6-4795-9DCD-913CB99FFC22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6C1914-54F6-4795-9DCD-913CB99FFC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6C1914-54F6-4795-9DCD-913CB99FFC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6C1914-54F6-4795-9DCD-913CB99FFC22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8FEB999-7284-4A97-A05F-F512A7EE82FC}
+	EndGlobalSection
+EndGlobal
