@@ -8,25 +8,37 @@ using System.Threading.Tasks;
 
 namespace EFCoreAssignmet02.Models
 {
-    [Table("Attendees")]
+    //[Table("Attendees")]
     internal class Attendee
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int AttendeesId { get; set; }
-        public string FullName { get; set; } = default!;
+        #region DataAnnotation
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int AttendeeId { get; set; }
+        //public string FullName { get; set; } = default!;
 
-        [MaxLength(200)]
-        [EmailAddress]
+        //[MaxLength(200)]
+        //[EmailAddress]
+        //public string Email { get; set; } = default!;
+        //public string Street { get; set; } = default!;
+        //public string City { get; set; } = default!;
+        //public string Country { get; set; } = default!;
+        //public string PostalCode { get; set; } = default!;
+
+        //[NotMapped]
+        //public string HomeAddress => $"{PostalCode}-{Street}-{City}-{Country}";
+
+        //public Badge? Badge { get; set; } 
+        #endregion
+
+        public int AttendeeId { get; set; }
+        public string FullName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Street { get; set; } = default!;
         public string City { get; set; } = default!;
         public string Country { get; set; } = default!;
         public string PostalCode { get; set; } = default!;
-
-        [NotMapped]
         public string HomeAddress => $"{PostalCode}-{Street}-{City}-{Country}";
-
         public Badge? Badge { get; set; }
     }
 }

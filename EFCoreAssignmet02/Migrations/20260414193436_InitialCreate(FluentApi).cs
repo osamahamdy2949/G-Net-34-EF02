@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EFCoreAssignmet02.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateDataAnnotation : Migration
+    public partial class InitialCreateFluentApi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,9 +15,9 @@ namespace EFCoreAssignmet02.Migrations
                 name: "Attendees",
                 columns: table => new
                 {
-                    AttendeesId = table.Column<int>(type: "int", nullable: false)
+                    AttendeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AttendeeName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -26,7 +26,7 @@ namespace EFCoreAssignmet02.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attendees", x => x.AttendeesId);
+                    table.PrimaryKey("PK_Attendees", x => x.AttendeeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,7 +52,7 @@ namespace EFCoreAssignmet02.Migrations
                 {
                     OrganizerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    OrganizerName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     IsVerified = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -79,7 +79,7 @@ namespace EFCoreAssignmet02.Migrations
                         name: "FK_Badges_Attendees_AttendeeId",
                         column: x => x.AttendeeId,
                         principalTable: "Attendees",
-                        principalColumn: "AttendeesId",
+                        principalColumn: "AttendeeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

@@ -8,17 +8,25 @@ using System.Threading.Tasks;
 
 namespace EFCoreAssignmet02.Models
 {
-    [Table("Events")]
+    //[Table("Events")]
     internal class Event
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        #region DataAnnotation
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int EventId { get; set; }
+        //public string Title { get; set; } = default!;
+        //public string Description { get; set; } = default!;
+        //public DateTime StartDate { get; set; }
+        //public DateTime? EndDate { get; set; }
+        //public int MaxAttendees{ get; set; } 
+        #endregion
+
         public int EventId { get; set; }
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int MaxAttendees{ get; set; }
-
+        public int MaxAttendees { get; set; }
     }
 }
