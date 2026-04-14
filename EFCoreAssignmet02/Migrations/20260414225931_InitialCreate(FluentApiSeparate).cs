@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EFCoreAssignmet02.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateFluentApi : Migration
+    public partial class InitialCreateFluentApiSeparate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

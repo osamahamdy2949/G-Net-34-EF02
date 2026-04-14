@@ -1,4 +1,5 @@
-﻿using EFCoreAssignmet02.Models;
+﻿using EFCoreAssignmet02.Configurations;
+using EFCoreAssignmet02.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace EFCoreAssignmet02
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region FluentApi Configuration (NotSeparate)
             //=> ModelBuilder Return (EntityTypeBuilder) <=
 
             //modelBuilder.Entity<Organizer>().ToTable("Organizers").HasKey(o => o.OrganizerId);
@@ -34,53 +36,61 @@ namespace EFCoreAssignmet02
             //            .HasColumnName("OrganizerName");
 
             //Another Way
-            modelBuilder.Entity<Organizer>(Entity =>
-            {
-                Entity.ToTable("Organizers").HasKey((o => o.OrganizerId));
-                
-                Entity.Property(o => o.Name)
-                      .HasColumnType("varchar")
-                      .HasMaxLength(100)
-                      .HasColumnName("OrganizerName");
-                
-                Entity.Property(o => o.CompanyName).HasMaxLength(200);
-                
-                Entity.HasOne<OrganizerProfile>(op => op.OrganizerProfile)
-                      .WithOne(o => o.Organizer)
-                      .HasForeignKey<OrganizerProfile>(op => op.OrganizerId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
+            //    modelBuilder.Entity<Organizer>(Entity =>
+            //    {
+            //        Entity.ToTable("Organizers").HasKey((o => o.OrganizerId));
 
-            modelBuilder.Entity<OrganizerProfile>(Entity =>
-            {
-                Entity.ToTable("OrganizerProfiles").HasKey(op => op.ProfileId);
-            });
+            //        Entity.Property(o => o.Name)
+            //              .HasColumnType("varchar")
+            //              .HasMaxLength(100)
+            //              .HasColumnName("OrganizerName");
 
-            modelBuilder.Entity<Event>(Entity =>
-            {
-                Entity.ToTable("Events").HasKey(e => e.EventId);
-            });
+            //        Entity.Property(o => o.CompanyName).HasMaxLength(200);
 
-            modelBuilder.Entity<Attendee>(Entity =>
-            {
-                Entity.ToTable("Attendees").Ignore(a=>a.HomeAddress).HasKey(a => a.AttendeeId);
-                
-                Entity.Property(a => a.FullName).HasColumnType("varchar")
-                      .HasMaxLength(100)
-                      .HasColumnName("AttendeeName");
-               
-                Entity.Property(a => a.Email).HasMaxLength(200);
+            //        Entity.HasOne<OrganizerProfile>(op => op.OrganizerProfile)
+            //              .WithOne(o => o.Organizer)
+            //              .HasForeignKey<OrganizerProfile>(op => op.OrganizerId)
+            //              .OnDelete(DeleteBehavior.Cascade);
+            //    });
 
-                Entity.HasOne<Badge>(b => b.Badge)
-                      .WithOne(a => a.Attendee)
-                      .HasForeignKey<Badge>(b => b.AttendeeId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
+            //    modelBuilder.Entity<OrganizerProfile>(Entity =>
+            //    {
+            //        Entity.ToTable("OrganizerProfiles").HasKey(op => op.ProfileId);
+            //    });
 
-            modelBuilder.Entity<Badge>(Entity =>
-            {
-                Entity.ToTable("Badges").HasKey(b => b.Id);
-            });
+            //    modelBuilder.Entity<Event>(Entity =>
+            //    {
+            //        Entity.ToTable("Events").HasKey(e => e.EventId);
+            //    });
+
+            //    modelBuilder.Entity<Attendee>(Entity =>
+            //    {
+            //        Entity.ToTable("Attendees").Ignore(a=>a.HomeAddress).HasKey(a => a.AttendeeId);
+
+            //        Entity.Property(a => a.FullName).HasColumnType("varchar")
+            //              .HasMaxLength(100)
+            //              .HasColumnName("AttendeeName");
+
+            //        Entity.Property(a => a.Email).HasMaxLength(200);
+
+            //        Entity.HasOne<Badge>(b => b.Badge)
+            //              .WithOne(a => a.Attendee)
+            //              .HasForeignKey<Badge>(b => b.AttendeeId)
+            //              .OnDelete(DeleteBehavior.Cascade);
+            //    });
+
+            //    modelBuilder.Entity<Badge>(Entity =>
+            //    {
+            //        Entity.ToTable("Badges").HasKey(b => b.Id);
+            //    });
+            // 
+            #endregion
+
+            modelBuilder.ApplyConfiguration(new OrganizerConfig());
+            modelBuilder.ApplyConfiguration(new OrganizerProfileConfig());
+            modelBuilder.ApplyConfiguration(new EventConfig());
+            modelBuilder.ApplyConfiguration(new AttendeeConfig());
+            modelBuilder.ApplyConfiguration(new BadgeConfig());
         }
     }
 }

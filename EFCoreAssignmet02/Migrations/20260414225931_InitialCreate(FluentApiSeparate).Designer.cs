@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreAssignmet02.Migrations
 {
     [DbContext(typeof(EventHubDbContext))]
-    [Migration("20260414193436_InitialCreate(FluentApi)")]
-    partial class InitialCreateFluentApi
+    [Migration("20260414225931_InitialCreate(FluentApiSeparate)")]
+    partial class InitialCreateFluentApiSeparate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
