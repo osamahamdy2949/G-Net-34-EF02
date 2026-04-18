@@ -17,11 +17,12 @@ namespace EFCoreAssignmet02
         }
 
         #region DbSets
-        //DbSet<Organizer> Organizers {  get; set; }
-        //DbSet<OrganizerProfile> OrganizerProfiles {  get; set; }
-        //DbSet<Event> Events {  get; set; }
-        //DbSet<Attendee> Attendees {  get; set; }
-        //DbSet<Badge> Badges {  get; set; } 
+        DbSet<Organizer> Organizers { get; set; }
+        DbSet<OrganizerProfile> OrganizerProfiles { get; set; }
+        DbSet<Event> Events { get; set; }
+        DbSet<Attendee> Attendees { get; set; }
+        DbSet<Badge> Badges { get; set; }
+        DbSet<Registration> Registrations { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -86,11 +87,12 @@ namespace EFCoreAssignmet02
             // 
             #endregion
 
-            modelBuilder.ApplyConfiguration(new OrganizerConfig());
-            modelBuilder.ApplyConfiguration(new OrganizerProfileConfig());
+            //modelBuilder.ApplyConfiguration(new OrganizerConfig());
+            //modelBuilder.ApplyConfiguration(new OrganizerProfileConfig());
             modelBuilder.ApplyConfiguration(new EventConfig());
             modelBuilder.ApplyConfiguration(new AttendeeConfig());
-            modelBuilder.ApplyConfiguration(new BadgeConfig());
+            modelBuilder.ApplyConfiguration(new RegistrationConfig());
+            //modelBuilder.ApplyConfiguration(new BadgeConfig());
         }
     }
 }

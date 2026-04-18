@@ -8,30 +8,9 @@ using System.Threading.Tasks;
 
 namespace EFCoreAssignmet02.Models
 {
-    //[Table("Attendees")]
     internal class Attendee
     {
-        #region DataAnnotation
-        //[Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int AttendeeId { get; set; }
-        //public string FullName { get; set; } = default!;
-
-        //[MaxLength(200)]
-        //[EmailAddress]
-        //public string Email { get; set; } = default!;
-        //public string Street { get; set; } = default!;
-        //public string City { get; set; } = default!;
-        //public string Country { get; set; } = default!;
-        //public string PostalCode { get; set; } = default!;
-
-        //[NotMapped]
-        //public string HomeAddress => $"{PostalCode}-{Street}-{City}-{Country}";
-
-        //public Badge? Badge { get; set; } 
-        #endregion
-
-        public int AttendeeId { get; set; }
+        public int Id { get; set; }
         public string FullName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Street { get; set; } = default!;
@@ -40,5 +19,7 @@ namespace EFCoreAssignmet02.Models
         public string PostalCode { get; set; } = default!;
         public string HomeAddress => $"{PostalCode}-{Street}-{City}-{Country}";
         public Badge? Badge { get; set; }
+
+        public ICollection<Registration> Events { get; set; } = new HashSet<Registration>();
     }
 }

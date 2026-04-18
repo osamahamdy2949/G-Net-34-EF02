@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreAssignmet02.Migrations
 {
     [DbContext(typeof(EventHubDbContext))]
-    [Migration("20260414225931_InitialCreate(FluentApiSeparate)")]
-    partial class InitialCreateFluentApiSeparate
+    [Migration("20260417161658_RelationshipBtAttendeeAndBadge")]
+    partial class RelationshipBtAttendeeAndBadge
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace EFCoreAssignmet02.Migrations
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Attendee", b =>
                 {
-                    b.Property<int>("AttendeeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendeeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -43,14 +43,11 @@ namespace EFCoreAssignmet02.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar")
-                        .HasColumnName("AttendeeName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -60,9 +57,9 @@ namespace EFCoreAssignmet02.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AttendeeId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Attendees", (string)null);
+                    b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Badge", b =>
@@ -92,16 +89,16 @@ namespace EFCoreAssignmet02.Migrations
                     b.HasIndex("AttendeeId")
                         .IsUnique();
 
-                    b.ToTable("Badges", (string)null);
+                    b.ToTable("Badges");
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Event", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -113,6 +110,9 @@ namespace EFCoreAssignmet02.Migrations
                     b.Property<int>("MaxAttendees")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -120,44 +120,43 @@ namespace EFCoreAssignmet02.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EventId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Events", (string)null);
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Organizer", b =>
                 {
-                    b.Property<int>("OrganizerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar")
-                        .HasColumnName("OrganizerName");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrganizerId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Organizers", (string)null);
+                    b.ToTable("Organizers");
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.OrganizerProfile", b =>
                 {
-                    b.Property<int>("ProfileId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfileId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)");
@@ -171,12 +170,12 @@ namespace EFCoreAssignmet02.Migrations
                     b.Property<string>("WebsiteUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProfileId");
+                    b.HasKey("Id");
 
                     b.HasIndex("OrganizerId")
                         .IsUnique();
 
-                    b.ToTable("OrganizerProfiles", (string)null);
+                    b.ToTable("OrganizerProfiles");
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Badge", b =>
@@ -190,10 +189,17 @@ namespace EFCoreAssignmet02.Migrations
                     b.Navigation("Attendee");
                 });
 
+            modelBuilder.Entity("EFCoreAssignmet02.Models.Event", b =>
+                {
+                    b.HasOne("EFCoreAssignmet02.Models.Event", null)
+                        .WithMany("Session")
+                        .HasForeignKey("SessionId");
+                });
+
             modelBuilder.Entity("EFCoreAssignmet02.Models.OrganizerProfile", b =>
                 {
                     b.HasOne("EFCoreAssignmet02.Models.Organizer", "Organizer")
-                        .WithOne("OrganizerProfile")
+                        .WithOne("Profile")
                         .HasForeignKey("EFCoreAssignmet02.Models.OrganizerProfile", "OrganizerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -206,10 +212,14 @@ namespace EFCoreAssignmet02.Migrations
                     b.Navigation("Badge");
                 });
 
+            modelBuilder.Entity("EFCoreAssignmet02.Models.Event", b =>
+                {
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("EFCoreAssignmet02.Models.Organizer", b =>
                 {
-                    b.Navigation("OrganizerProfile")
-                        .IsRequired();
+                    b.Navigation("Profile");
                 });
 #pragma warning restore 612, 618
         }

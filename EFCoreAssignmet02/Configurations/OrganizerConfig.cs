@@ -13,19 +13,9 @@ namespace EFCoreAssignmet02.Configurations
     {
         public void Configure(EntityTypeBuilder<Organizer> builder)
         {
-            builder.ToTable("Organizers").HasKey((o => o.OrganizerId));
-
-            builder.Property(o => o.Name)
-                  .HasColumnType("varchar")
-                  .HasMaxLength(100)
-                  .HasColumnName("OrganizerName");
-
-            builder.Property(o => o.CompanyName).HasMaxLength(200);
-
-            builder.HasOne<OrganizerProfile>(op => op.OrganizerProfile)
-                  .WithOne(o => o.Organizer)
-                  .HasForeignKey<OrganizerProfile>(op => op.OrganizerId)
-                  .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(op=>op.Profile)
+                   .WithOne(o=>o.Organizer)
+                   .HasForeignKey<OrganizerProfile>(op => op.OrganizerId);
         }
     }
 }

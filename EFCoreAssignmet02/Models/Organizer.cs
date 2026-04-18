@@ -8,28 +8,12 @@ using System.Threading.Tasks;
 
 namespace EFCoreAssignmet02.Models
 {
-    //[Table("Organizers")]
     internal class Organizer
-    {
-        #region DataAnnotation
-        //[Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int OrganizerId { get; set; }
-
-        //[MaxLength(100)]
-        //[Required(ErrorMessage = "Name Can't be More Than 100 Char")]
-        //public string Name { get; set; } = default!;
-
-        //[MaxLength(200)]
-        //public string? CompanyName { get; set; }
-        //public bool IsVerified { get; set; }
-        //public OrganizerProfile OrganizerProfile { get; set; } = default!; 
-        #endregion
-        
-        public int OrganizerId { get; set; }
+    {        
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public string? CompanyName { get; set; }
         public bool IsVerified { get; set; }
-        public OrganizerProfile OrganizerProfile { get; set; } = default!;
+        public OrganizerProfile? Profile { get; set; }
     }
 }

@@ -13,7 +13,10 @@ namespace EFCoreAssignmet02.Configurations
     {
         public void Configure(EntityTypeBuilder<Event> builder)
         {
-            builder.ToTable("Events").HasKey(e => e.EventId);
+            builder.HasMany(e => e.Session)
+                   .WithOne()
+                   .HasForeignKey(e => e.SessionId)
+                   .IsRequired(false);
         }
     }
 }

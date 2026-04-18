@@ -13,18 +13,19 @@ namespace EFCoreAssignmet02.Configurations
     {
         public void Configure(EntityTypeBuilder<Attendee> builder)
         {
-            builder.ToTable("Attendees").Ignore(a => a.HomeAddress).HasKey(a => a.AttendeeId);
+            builder.HasOne(b => b.Badge)
+                   .WithOne(a => a.Attendee)
+                   .HasForeignKey<Badge>(b => b.AttendeeId)
+                   .IsRequired();
 
-            builder.Property(a => a.FullName).HasColumnType("varchar")
-                  .HasMaxLength(100)
-                  .HasColumnName("AttendeeName");
+            //builder.HasMany(e => e.Events)
+            //       .WithMany(a => a.Attendees)
+            //       .UsingEntity(jt =>
+            //       {
+            //           jt.ToTable("Registrations")
+            //             .Property<DateTime>("CraetedAt").HasDefaultValueSql("GETDATE()");
 
-            builder.Property(a => a.Email).HasMaxLength(200);
-
-            builder.HasOne<Badge>(b => b.Badge)
-                  .WithOne(a => a.Attendee)
-                  .HasForeignKey<Badge>(b => b.AttendeeId)
-                  .OnDelete(DeleteBehavior.Cascade);
+            //       });
         }
     }
 }

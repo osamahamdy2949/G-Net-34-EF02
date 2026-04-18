@@ -8,28 +8,14 @@ using System.Threading.Tasks;
 
 namespace EFCoreAssignmet02.Models
 {
-    //[Table("Badges")]
     internal class Badge
     {
-        #region DataAnnotation
-        //[Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int Id { get; set; }
-        //public string BadgeNumber { get; set; } = default!;
-        //public DateTime IssuedDate { get; set; }
-        //public string Tier { get; set; } = default!;
-
-        //public Attendee Attendee { get; set; } = default!;
-
-        //[ForeignKey(nameof(Attendee))]
-        //public int AttendeeId { get; set; } 
-        #endregion
-
         public int Id { get; set; }
         public string BadgeNumber { get; set; } = default!;
         public DateTime IssuedDate { get; set; }
         public string Tier { get; set; } = default!;
-        public Attendee Attendee { get; set; } = default!;
-        public int AttendeeId { get; set; }
+        public Attendee Attendee { get; set; } = default!; //Nav Prop
+        public int AttendeeId { get; set; } //FK
+
     }
 }
