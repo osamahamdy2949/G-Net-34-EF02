@@ -18,8 +18,6 @@ namespace EFCoreAssignmet02.Configurations
                    .HasForeignKey<Badge>(b => b.AttendeeId)
                    .IsRequired();
 
-            builder.OwnsOne(a => a.HomeAddress);
-
             //builder.HasMany(e => e.Events)
             //       .WithMany(a => a.Attendees)
             //       .UsingEntity(jt =>
