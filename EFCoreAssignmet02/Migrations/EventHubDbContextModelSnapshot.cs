@@ -30,11 +30,27 @@ namespace EFCoreAssignmet02.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -185,37 +201,6 @@ namespace EFCoreAssignmet02.Migrations
                     b.HasIndex("AttendeeId");
 
                     b.ToTable("Registrations");
-                });
-
-            modelBuilder.Entity("EFCoreAssignmet02.Models.Attendee", b =>
-                {
-                    b.OwnsOne("EFCoreAssignmet02.Models.Address", "HomeAddress", b1 =>
-                        {
-                            b1.Property<int>("AttendeeId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Country")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("PostalCode")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("AttendeeId");
-
-                            b1.ToTable("Attendees");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AttendeeId");
-                        });
-
-                    b.Navigation("HomeAddress")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCoreAssignmet02.Models.Badge", b =>
