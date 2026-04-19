@@ -183,18 +183,14 @@ namespace EFCoreAssignmet02.Migrations
                     b.Property<int>("AttendeeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FirstCreationAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<DateTime>("LastUpdateAt")
-                        .ValueGeneratedOnUpdate()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FirstCreationAt")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("EventId", "AttendeeId");
 

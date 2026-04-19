@@ -16,14 +16,8 @@ namespace EFCoreAssignmet02.Configurations
         {
             builder.HasKey(r => new { r.EventId, r.AttendeeId });
 
-            builder.Property<DateTime>("FirstCreationAt")
-                   .HasDefaultValueSql("GETDATE()")
-                   .ValueGeneratedOnAdd();
-           
-            builder.Property<DateTime>("LastUpdateAt")
-                   .HasDefaultValueSql("GETDATE()")
-                   .ValueGeneratedOnUpdate();
-
+            builder.Property(r => r.RegistrationDate).HasColumnName("FirstCreationAt")
+                                                     .HasDefaultValueSql("GETDATE()");
         }
     }
 }

@@ -13,6 +13,9 @@ namespace EFCoreAssignmet02.Models
         public int EventId { get; set; } //Fk
         public Attendee Attendee { get; set; } = default!;
         public Event Event { get; set; } = default!;
+
         public string? Note { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
     }
 }
