@@ -13,11 +13,11 @@ namespace EFCoreAssignmet02.Models
         public int Id { get; set; }
         public string FullName { get; set; } = default!;
         public string Email { get; set; } = default!;
-        public string Street { get; set; } = default!;
-        public string City { get; set; } = default!;
-        public string Country { get; set; } = default!;
-        public string PostalCode { get; set; } = default!;
-        public string HomeAddress => $"{PostalCode}-{Street}-{City}-{Country}";
+        //public string Street { get; set; } = default!;
+        //public string City { get; set; } = default!;
+        //public string Country { get; set; } = default!;
+        //public string PostalCode { get; set; } = default!;
+        public Address HomeAddress { get; set; }
         public Badge? Badge { get; set; }
 
         public ICollection<Registration> Events { get; set; } = new HashSet<Registration>();
