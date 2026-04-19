@@ -87,12 +87,10 @@ namespace EFCoreAssignmet02
             // 
             #endregion
 
-            //modelBuilder.ApplyConfiguration(new OrganizerConfig());
-            //modelBuilder.ApplyConfiguration(new OrganizerProfileConfig());
+            modelBuilder.ApplyConfiguration(new OrganizerConfig());
             modelBuilder.ApplyConfiguration(new EventConfig());
             modelBuilder.ApplyConfiguration(new AttendeeConfig());
             modelBuilder.ApplyConfiguration(new RegistrationConfig());
-            //modelBuilder.ApplyConfiguration(new BadgeConfig());
         }
     }
 }
